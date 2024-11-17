@@ -28,36 +28,36 @@ class ProfileApp extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 40),
-            CircleAvatar(
-              radius: 60,
-              backgroundImage: AssetImage(
-                  profileData.avatarUrl), 
-            ),
-            const SizedBox(height: 20),
-            Text(
-              profileData.name,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: mainColor,
+      body: SingleChildScrollView(
+        child: Column(
+          
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 40),
+              CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage(
+                    profileData.avatarUrl), 
               ),
-            ),
-            Text(
-              profileData.position,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
+              const SizedBox(height: 20),
+              Text(
+                profileData.name,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: mainColor,
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            //loop
-            Expanded(
-              child: ListView.builder(
+              Text(
+                profileData.position,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 20),
+              //loop
+              ListView.builder(
                 shrinkWrap: true, //allow listview to adjust size based on its content
                 physics: const AlwaysScrollableScrollPhysics(), 
                  itemCount: profileData.tiles.length, //to ensure it creates only as many items as there are in the tile list
@@ -70,23 +70,23 @@ class ProfileApp extends StatelessWidget {
                     data: tile.value,
                   );
                  },
-              ),
-            )
-            
-            // this is manual hardcoded
-            // const ProfileTile(
-            //   icon: Icons.phone,
-            //   title: "Phone Number",
-            //   data: "+123 456 7890",
-            // ),
-            
-            //  const ProfileTile(
-            //   icon: Icons.location_on,
-            //   title: "Address",
-            //   data: "Cambodia",
-            // ),
-          ],
-        ),
+              )
+              
+              // this is manual hardcoded
+              // const ProfileTile(
+              //   icon: Icons.phone,
+              //   title: "Phone Number",
+              //   data: "+123 456 7890",
+              // ),
+              
+              //  const ProfileTile(
+              //   icon: Icons.location_on,
+              //   title: "Address",
+              //   data: "Cambodia",
+              // ),
+            ],
+          ),
+      ),
       );
     
   }
