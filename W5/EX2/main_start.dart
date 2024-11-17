@@ -59,7 +59,7 @@ class ProfileApp extends StatelessWidget {
               //loop
               ListView.builder(
                 shrinkWrap: true, //allow listview to adjust size based on its content
-                physics: const AlwaysScrollableScrollPhysics(), 
+                physics: const NeverScrollableScrollPhysics(), 
                  itemCount: profileData.tiles.length, //to ensure it creates only as many items as there are in the tile list
                  itemBuilder: (context, index){ // its a callback function- defines how to build each item in the list
                   final tile = profileData.tiles[index]; // inside function, we access the tiledata at the given index
