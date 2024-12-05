@@ -30,7 +30,12 @@ class _ExpenseFormState extends State<ExpenseForm> {
     _valueController.dispose();
     super.dispose();
   }
-
+  
+  void dropDownChanged(Category? newValue){
+    setState(() {
+      selectValue = newValue;
+    });
+  }
   void onCancel() {
     // Close modal
     Navigator.pop(context);
@@ -165,11 +170,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 200),
                 child: DropdownCategory(
-                  onChanged: (Category? value) {
-                    setState(() {
-                      selectValue = value;
-                    });
-                  },
+                  onChanged: dropDownChanged,
                 ),
               ),
               Row(
