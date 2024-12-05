@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import '../../models/expense.dart';
 import '../../buttons/category_button.dart';
 
@@ -19,6 +20,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
   final _valueController = TextEditingController();
   Category? selectValue;
   DateTime selectedDate = DateTime.now(); // Default date: current date
+  DateTime? _selectDate;
 
   String get title => _titleController.text;
 
@@ -85,10 +87,10 @@ class _ExpenseFormState extends State<ExpenseForm> {
     }
   }
 
-  String buttonText = 'Select Date'; // Initial text for the button
+  
 
   // Date Picker
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> selectDate() async {
     // Open the date picker dialog
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -96,9 +98,9 @@ class _ExpenseFormState extends State<ExpenseForm> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != _selectDate) {
       setState(() {
-        selectedDate = picked; // Update the selected date
+        _selectDate = picked; // Update the selected date
       });
     }
   }
@@ -137,20 +139,22 @@ class _ExpenseFormState extends State<ExpenseForm> {
               ),
               const SizedBox(width: 10),
               // Date picker button
-              TextButton(
-                onPressed: () => _selectDate(context),
-                child: Row(
+              Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      buttonText,
+                      _selectDate == null 
+                      ? 'Select Date'
+                      : DateFormat('yyyy-MM-dd').format(_selectDate!),
                       style: const TextStyle(fontSize: 14),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.calendar_month_outlined),
+                    IconButton(
+                      onPressed: selectDate, 
+                      icon: const Icon(Icons.calendar_month_outlined)
+                      ),
                   ],
                 ),
-              ),
             ],
           ),
           const SizedBox(height: 20),
